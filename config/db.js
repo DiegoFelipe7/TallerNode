@@ -1,3 +1,9 @@
+/**
+ * Conexion a mongo
+ * @author Diego Felipe Muñoz
+ * @since 28/02/2022
+ * @version 1.0.0
+ */
 const mongoose = require("mongoose");
 require("dotenv").config({ path: "variables.env" });
 const conectarDB = async () => {
