@@ -1,4 +1,12 @@
+/**
+ * @author Diego Felipe Muñoz
+ * @since 28/02/2022
+ * @version 1.0.0
+ */
 const GameModel = require("../models/GameModel");
+/**
+ * @description este metodo nos direcciona a la pagina game
+ */
 exports.getUser = (req, res, next) => {
   try {
     res.status(200).render("Game.pug", {});
@@ -7,6 +15,9 @@ exports.getUser = (req, res, next) => {
     console.log(error);
   }
 };
+/**
+ * @description Realizamos la busqueda de un juego por el id
+ */
 exports.getGames = (req, res) => {
   GameModel.findById(req.params.id)
     .then((UserResult) => {
@@ -36,12 +47,15 @@ exports.getGames = (req, res) => {
       });
     });
 };
+/**
+ * @description Realizamos la busqueda de un juego por el id y determinamos el ganador
+ */
 exports.winner = (req, res) => {
   GameModel.findById(req.params.id).then((winnerResult) => {
     const winner = {
       winner: {
         id: winnerResult.gamers[1].id,
-        name: winnerResult.gamers[2].name,
+        name: winnerResult.gamers[1].name,
       },
     };
     res.status(201).json(winner);

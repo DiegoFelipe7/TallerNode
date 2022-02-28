@@ -1,5 +1,13 @@
+/**
+ * @author Diego Felipe Muñoz
+ * @since 28/02/2022
+ * @version 1.0.0
+ */
 const GameModel = require("../models/GameModel");
 const { v4: uuidv4 } = require("uuid");
+/**
+ * @description este metodo nos direcciona a la pagina createGame
+ */
 exports.gameRegistration = (req, res, next) => {
   try {
     res.status(200).render("createGame.pug", {});
@@ -8,7 +16,9 @@ exports.gameRegistration = (req, res, next) => {
     console.log(error);
   }
 };
-
+/**
+ * @description Realizamos el registro de lo usuarios con el nombre del juego y sus respectivos jugadores
+ */
 exports.saveGame = (req, res) => {
   const Adgame = new GameModel({
     type: req.body.type,
