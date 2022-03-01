@@ -25,7 +25,23 @@ exports.getGames = (req, res) => {
         let game = {
           _id: UserResult._id,
           name: UserResult.name,
-          gamers: UserResult.gamers,
+          gamers: [
+            UserResult.gamers[0]._id,
+            {
+              id: UserResult.gamers[0]._id,
+              name: UserResult.gamers[0].name,
+            },
+            UserResult.gamers[1]._id,
+            {
+              id: UserResult.gamers[1]._id,
+              name: UserResult.gamers[1].name,
+            },
+            UserResult.gamers[2]._id,
+            {
+              id: UserResult.gamers[2]._id,
+              name: UserResult.gamers[2].name,
+            },
+          ],
           inprogress: UserResult.inprogress,
         };
         res.status(201).json(game);
@@ -33,9 +49,30 @@ exports.getGames = (req, res) => {
         let game = {
           _id: UserResult._id,
           name: UserResult.name,
-          gamers: UserResult.gamers,
+          gamers: [
+            UserResult.gamers[0]._id,
+            {
+              id: UserResult.gamers[0]._id,
+              name: UserResult.gamers[0].name,
+            },
+            UserResult.gamers[1]._id,
+            {
+              id: UserResult.gamers[1]._id,
+              name: UserResult.gamers[1].name,
+            },
+            UserResult.gamers[2]._id,
+            {
+              id: UserResult.gamers[2]._id,
+              name: UserResult.gamers[2].name,
+            },
+          ],
           inprogress: UserResult.inprogress,
-          winner: UserResult.winner,
+          winner: [
+            {
+              _id: UserResult._id,
+              name: UserResult.gamers[0].name,
+            },
+          ],
         };
         res.status(201).json(game);
       }
@@ -54,8 +91,8 @@ exports.winner = (req, res) => {
   GameModel.findById(req.params.id).then((winnerResult) => {
     const winner = {
       winner: {
-        id: winnerResult.gamers[1].id,
-        name: winnerResult.gamers[1].name,
+        id: winnerResult.gamers[0].id,
+        name: winnerResult.gamers[0].name,
       },
     };
     res.status(201).json(winner);

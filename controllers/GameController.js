@@ -39,7 +39,11 @@ exports.saveGame = (req, res) => {
       const game = {
         _id: GameResult._id,
         type: GameResult.type,
-        gamers: GameResult.gamers,
+        gamers: [
+          { name: GameResult.gamers[0].name },
+          { name: GameResult.gamers[1].name },
+          { name: GameResult.gamers[2].name },
+        ],
       };
       res.status(201).json(game);
     })

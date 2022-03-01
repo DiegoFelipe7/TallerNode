@@ -3,13 +3,13 @@ const SchemaCreateGame = mongoose.Schema({
   type: {
     type: String,
     require: false,
-    trim: true,
+    trim: [true, "Ingresa el nombre del juego"],
   },
   gamers: [
     {
       name: {
         type: String,
-        require: true,
+        require: [true, "Ingresa el nombre del jugador"],
         trim: true,
       },
     },
@@ -32,5 +32,9 @@ const SchemaCreateGame = mongoose.Schema({
       },
     },
   ],
+  createAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 module.exports = mongoose.model("Game", SchemaCreateGame);
