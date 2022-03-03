@@ -12,11 +12,17 @@ const SchemaCreateGame = mongoose.Schema({
         require: [true, "Ingresa el nombre del jugador"],
         trim: true,
       },
+      score: {
+        type: Number,
+        require: [true, "Ingrese el puntaje del jugador"],
+        trim: true,
+        default: 0,
+      },
     },
   ],
   inprogress: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   winner: [
     {

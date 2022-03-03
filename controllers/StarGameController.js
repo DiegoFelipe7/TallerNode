@@ -22,24 +22,37 @@ exports.PlayersScore = (req, res) => {
   const { id, gamers } = req.body;
   GameModel.findById(id)
     .then((PlayerResult) => {
-      let game = {
-        id: PlayerResult.id,
-        gamers: [
-          {
-            id: PlayerResult.gamers[0].id,
-            score: gamers[0],
-          },
-          {
-            id: PlayerResult.gamers[1].id,
-            score: gamers[1],
-          },
-          {
-            id: PlayerResult.gamers[2].id,
-            score: gamers[2],
-          },
-        ],
-      };
-      res.status(201).json(game);
+      PlayerResult.inprogress = false;
+      PlayerResult.gamers[0].score = gamers[0];
+      PlayerResult.gamers[1].score = gamers[1];
+      PlayerResult.gamers[2].score = gamers[2];
+      PlayerResult.save()
+        .then((resul) => {
+          let game = {
+            id: resul.id,
+            gamers: [
+              {
+                id: resul.gamers[0].id,
+                score: resul.gamers[0].score,
+              },
+              {
+                id: resul.gamers[1].id,
+                score: resul.gamers[1].score,
+              },
+              {
+                id: resul.gamers[2].id,
+                score: resul.gamers[2].score,
+              },
+            ],
+          };
+          res.status(201).json(game);
+        })
+        .catch((err) => {
+          res.status(404).json({
+            error: err.message,
+            message: "Ocurrio un error",
+          });
+        });
     })
     .catch((err) => {
       res.status(404).json({
